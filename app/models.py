@@ -12,7 +12,11 @@ class ItemModel:
         }
 
     def get_connect(self):
-        return mysql.connector.connect(**self.config)
+        conn = mysql.connector.connect(**self.config)
+        cursor = conn.cursor()
+        cursor.execute("SET NAMES utf8mb4;")
+        cursor.close()
+        return conn
 
     def get_all_items(self):
         try:
