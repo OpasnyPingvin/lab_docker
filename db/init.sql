@@ -1,14 +1,7 @@
-SET NAMES 'utf8mb4';
-SET CHARACTER SET utf8mb4;
-
-CREATE DATABASE IF NOT EXISTS web_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE web_db;
-
-DROP TABLE IF EXISTS items;
-
-CREATE TABLE items (
+CREATE TABLE IF NOT EXISTS items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO items (name) VALUES ('Пример 1'), ('Пример 2');
+

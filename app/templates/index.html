@@ -1,14 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>MVC App</title>
+    <meta charset="utf-8">
+    <title>Task Navigator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: #fcfcfc;
+            color: #444;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            margin: 25px 0;
+            display: flex;
+            gap: 15px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+        li {
+            background-color: #fff;
+            margin: 12px 0;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .empty {
+            color: #7f8c8d;
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            background-color: #eee;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Список из Базы Данных</h1>
-    <ul>
-        {% for item in items %}
-            <li>{{ item.name }}</li>
-        {% endfor %}
-    </ul>
+    <h1>📌 Навигатор Задач</h1>
+    
+    <form method="POST">
+        <input type="text" name="task" placeholder="Опишите новую задачу..." required>
+        <button type="submit">Добавить</button>
+    </form>
+    
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    <span>{{ item.name }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty">Список пуст. Самое время поставить новую цель!</p>
+    {% endif %}
 </body>
 </html>

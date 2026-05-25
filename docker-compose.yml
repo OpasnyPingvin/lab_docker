@@ -3,8 +3,10 @@ version: '3.8'
 services:
   db:
     image: mysql:8.0
-    restart: always
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --init-connect='SET NAMES utf8mb4;'
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: web_db
@@ -12,6 +14,7 @@ services:
       MYSQL_PASSWORD: db_password
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
@@ -22,7 +25,6 @@ services:
 
   web:
     build: .
-    restart: always
     ports:
       - "5000:5000"
     environment:
@@ -33,3 +35,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+volumes:
+  db_data:
